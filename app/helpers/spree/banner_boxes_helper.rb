@@ -16,7 +16,7 @@ module Spree
       if (params[:list])
         content_tag(:ul, banner.map{|ban| content_tag(:li, link_to(image_tag(ban.attachment.url(params[:style].to_sym)), (ban.url.blank? ? "javascript: void(0)" : ban.url)), :class => params[:class])}.join().html_safe )
       else
-        banner.map{|ban| content_tag(:div, link_to(image_tag(ban.attachment.url(params[:style].to_sym)), (ban.url.blank? ? "javascript: void(0)" : ban.url)), :class => params[:class])}.join().html_safe
+        banner.map{|ban| content_tag(:div, link_to(image_tag(ban.attachment.url(params[:style].to_sym), alt: ban.presentation), (ban.url.blank? ? "javascript: void(0)" : ban.url)), :class => params[:class])}.join().html_safe
       end
     end
 
@@ -37,7 +37,7 @@ module Spree
         banner.map do |ban| 
           content_tag :li, class: params[:li_class] do 
             content_tag :div, class: params[:div_class] do 
-              link_to(image_tag(ban.attachment.url(params[:style].to_sym)), (ban.url.blank? ? "javascript: void(0)" : ban.url))
+              link_to(image_tag(ban.attachment.url(params[:style].to_sym), alt: ban.presentation), (ban.url.blank? ? "javascript: void(0)" : ban.url))
             end
           end
         end.join().html_safe  
