@@ -37,7 +37,7 @@ module Spree
         banner.map do |ban| 
           content_tag :li, class: params[:li_class] do 
             content_tag :div, class: params[:div_class] do 
-              link_to(image_tag(ban.attachment.url(params[:style].to_sym), alt: ban.presentation), (ban.url.blank? ? "javascript: void(0)" : ban.url))
+              link_to(image_tag(ban.attachment.url(params[:style].to_sym), alt: ban.presentation), (ban.url.blank? ? "javascript: void(0)" : ban.url), target: (ban.target_blank? ? "_blank" : ""))
             end
           end
         end.join().html_safe  

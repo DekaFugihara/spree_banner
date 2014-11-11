@@ -37,6 +37,12 @@
 			<%= f.check_box :enabled %>
 			<%= f.error_message_on :enabled %>
 		<% end %>
+		
+		<%= f.field_container :target_blank do %>
+			<%= f.label :target_blank, "Abrir em nova janela?" %><br />
+			<%= f.check_box :target_blank %>
+			<%= f.error_message_on :target_blank %>
+		<% end %>
 	</div>
 
 	<div class="clear"></div>
