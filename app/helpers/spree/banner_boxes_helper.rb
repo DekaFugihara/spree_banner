@@ -12,11 +12,13 @@ module Spree
       end
       res = []
       banner = @@banner.sort_by { |ban| ban.position }
-        
+
+      onClick_ga_event = "ga('send', 'event', { eventCategory: 'internal-promotion', eventAction: 'clicked', eventLabel: '#{params[:category]}'});"
+      
       if (params[:list])
-        content_tag(:ul, banner.map{|ban| content_tag(:li, link_to(image_tag(ban.attachment.url(params[:style].to_sym)), (ban.url.blank? ? "javascript: void(0)" : ban.url), target: (ban.target_blank? ? "_blank" : "")), :class => params[:class])}.join().html_safe )
+        content_tag(:ul, banner.map{|ban| content_tag(:li, link_to(image_tag(ban.attachment.url(params[:style].to_sym)), (ban.url.blank? ? "javascript: void(0)" : ban.url), target: (ban.target_blank? ? "_blank" : ""), onClick: onClick_ga_event), :class => params[:class])}.join().html_safe )
       else
-        banner.map{|ban| content_tag(:div, link_to(image_tag(ban.attachment.url(params[:style].to_sym), alt: ban.presentation), (ban.url.blank? ? "javascript: void(0)" : ban.url), target: (ban.target_blank? ? "_blank" : "")), :class => params[:class])}.join().html_safe
+        banner.map{|ban| content_tag(:div, link_to(image_tag(ban.attachment.url(params[:style].to_sym), alt: ban.presentation), (ban.url.blank? ? "javascript: void(0)" : ban.url), target: (ban.target_blank? ? "_blank" : ""), onClick: onClick_ga_event), :class => params[:class])}.join().html_safe
       end
     end
 
