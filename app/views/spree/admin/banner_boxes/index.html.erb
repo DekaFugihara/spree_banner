@@ -16,6 +16,8 @@
 
 <div id="new_banner_box" data-hook></div>
 
+<%= render :partial => 'tabs' %>
+
 <% if @collection.any? %>
 <table class="index sortable" id="listing_banner_boxes" data-sortable-link="<%= update_positions_admin_banner_boxes_url() %>">
 	<colgroup>
@@ -64,3 +66,8 @@
 
 <%= paginate @collection %>
 
+<script type="text/javascript">
+$("#banner_boxes_menu_container input").on("change", function(e){
+	$("#banner_boxes_menu_container form").submit();
+});
+</script>

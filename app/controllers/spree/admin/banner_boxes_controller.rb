@@ -34,7 +34,19 @@ module Spree
       def collection
         return @collection if @collection.present?
         params[:q] ||= {}
-        params[:q][:s] ||= "title asc"
+        params[:q][:s] ||= "created_at desc"
+        params[:category] ||= "compra"
+        params[:q][:enabled_eq] = params[:enabled] if params[:enabled]
+
+        params[:q][:category_in] = case params[:category]
+          when 'compra' then %w[mainbanner minibanner1 minibanner2]
+          when 'narrow' then %w[narrowbanner cupombanner cupombannermobile]
+          when 'landing' then %w[radio_landing apae_landing]
+          when 'marcas' then %w[brandbanner1 brandbanner2]
+          when 'logos' then %w[homelogo2]
+          when 'lateral' then %w[sidebanner]
+          else %w[params[:category]]
+        end
         
         @search = super.ransack(params[:q])
         @collection = @search.result.page(params[:page]).per(Spree::Config[:admin_products_per_page])
