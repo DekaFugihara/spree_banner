@@ -42,7 +42,7 @@ module Spree
           when 'compra' then %w[mainbanner minibanner1 minibanner2]
           when 'narrow' then %w[narrowbanner cupombanner cupombannermobile]
           when 'landing' then %w[radio_landing apae_landing]
-          when 'marcas' then %w[brandbanner1 brandbanner2]
+          when 'marcas' then %w[brandbanner]
           when 'logos' then %w[homelogo2]
           when 'lateral' then %w[sidebanner]
           else %w[params[:category]]
